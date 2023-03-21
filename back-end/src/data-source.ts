@@ -1,19 +1,20 @@
 import "reflect-metadata";
 import "dotenv/config";
-import path from "path";
 import { DataSource, DataSourceOptions } from "typeorm";
+import { Client } from "./entities/clients.entity";
+import { Contacts } from "./entities/contacts.entity";
+import { createMainColumns1679435751878 } from "./migrations/1679435751878-createMainColumns";
+import { createRelatedColumns1679436046014 } from "./migrations/1679436046014-createRelatedColumns";
+import { confirmRelations1679436173591 } from "./migrations/1679436173591-confirmRelations";
 
 const setDataSourceConfig = (): DataSourceOptions => {
-  const entities: string = path.join(__dirname, "./entities/**.{js,ts}");
-  const migrations: string = path.join(__dirname, "./migrations/**.{js,ts}");
-
   const nodeEnv: string = process.env.NODE_ENV;
 
   if (nodeEnv === "test") {
     return {
       type: "sqlite",
       database: ":memory:",
-      entities: [path.join(__dirname, "./entities/**.{js,ts}")],
+      entities: [Client, Contacts],
       synchronize: true,
     };
   }
@@ -22,8 +23,12 @@ const setDataSourceConfig = (): DataSourceOptions => {
     return {
       type: "postgres",
       url: process.env.DATABASE_URL,
-      entities: [entities],
-      migrations: [migrations],
+      entities: [Client, Contacts],
+      migrations: [
+        createMainColumns1679435751878,
+        createRelatedColumns1679436046014,
+        confirmRelations1679436173591,
+      ],
     };
   }
 
@@ -36,8 +41,12 @@ const setDataSourceConfig = (): DataSourceOptions => {
     port: parseInt(process.env.PGPORT),
     synchronize: false,
     logging: false,
-    entities: [entities],
-    migrations: [migrations],
+    entities: [Client, Contacts],
+    migrations: [
+      createMainColumns1679435751878,
+      createRelatedColumns1679436046014,
+      confirmRelations1679436173591,
+    ],
   };
 };
 
