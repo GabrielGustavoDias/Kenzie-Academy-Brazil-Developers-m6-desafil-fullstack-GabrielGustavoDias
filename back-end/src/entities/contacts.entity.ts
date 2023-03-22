@@ -26,7 +26,7 @@ export class Contacts {
   email: string;
 
   @Column()
-  cellphone: number;
+  cellphone: string;
 
   @Column()
   password: string;

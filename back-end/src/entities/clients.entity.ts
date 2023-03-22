@@ -22,6 +22,12 @@ export class Client {
   email: string;
 
   @Column()
+  completeName: string;
+
+  @Column()
+  cellphone: string;
+
+  @Column()
   password: string;
 
   @CreateDateColumn()
