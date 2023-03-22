@@ -39,7 +39,7 @@ export class Client {
   @DeleteDateColumn()
   deletedAt: Date;
 
-  @OneToMany(() => Contacts, (contacts) => contacts.clients)
+  @OneToMany(() => Contacts, (contacts) => contacts.client)
   contact: Contacts[];
 
   @BeforeUpdate()
@@ -48,8 +48,3 @@ export class Client {
     this.password = hashSync(this.password, 10);
   }
 }
-
-// Cliente = curso => lados N da relação
-// estudante => curso
-// 1 -> N
-// lado solo recebe many to one

@@ -31,19 +31,19 @@ export const userLoginService = async ({
         expiresIn: "24h",
       }
     );
+    return [200, token];
+  } else {
+    const token = jwt.sign(
+      {
+        id: contact.id,
+        email: contact.email,
+      },
+      String(process.env.SECRET_KEY),
+      {
+        subject: contact.id,
+        expiresIn: "24h",
+      }
+    );
+    return [200, token];
   }
-
-  const token = jwt.sign(
-    {
-      id: contact.id,
-      email: contact.email,
-    },
-    String(process.env.SECRET_KEY),
-    {
-      subject: contact.id,
-      expiresIn: "24h",
-    }
-  );
-
-  return [200, token];
 };

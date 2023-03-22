@@ -1,35 +1,37 @@
 import { Router } from "express";
 import {
-  createClientController,
-  listClientController,
-  updateClientController,
-  deleteClientController,
-} from "../controllers/clients.controller";
+  createContactController,
+  listContactController,
+  updateContactController,
+  deleteContactController,
+} from "../controllers/contacts.controller";
 import { ensureAuthMiddleware } from "../middlewares/login/ensureAuth.middleware";
+import { contactCreateSerializer } from "../serializers/contact.serializer";
 import { verifyEmailAlreadyExists } from "../middlewares/verifyEmailAlreadyExists.middleware";
 import { verifyOwnerMiddleware } from "../middlewares/verifyOwner.middleware";
 import { verifySchemaMiddleware } from "../middlewares/verifySchema.middleware";
-import { clientCreateSerializer } from "../serializers/client.serializer";
 
-export const clientRoutes = Router();
+export const contactRoutes = Router();
 
-clientRoutes.post(
+contactRoutes.post(
   "",
   ensureAuthMiddleware,
-  verifySchemaMiddleware(clientCreateSerializer),
+  verifySchemaMiddleware(contactCreateSerializer),
   verifyEmailAlreadyExists,
-  createClientController
+  createContactController
 );
-clientRoutes.get("", ensureAuthMiddleware, listClientController);
-clientRoutes.patch(
+contactRoutes.get("", ensureAuthMiddleware, listContactController);
+contactRoutes.patch(
   "/:id",
   ensureAuthMiddleware,
   verifyOwnerMiddleware,
-  updateClientController
+  updateContactController
 );
-clientRoutes.patch(
+contactRoutes.patch(
   "/:id",
   ensureAuthMiddleware,
   verifyOwnerMiddleware,
-  deleteClientController
+  deleteContactController
 );
+
+// CRIAR SERIALIZER DE UPDATE

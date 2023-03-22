@@ -1,4 +1,4 @@
-export interface IClient {
+export interface IContact {
   completeName: string;
   cellphone: string;
   email: string;
@@ -6,10 +6,11 @@ export interface IClient {
   registerDate: Date;
 }
 
-export interface IClientReturn {
+export interface IContactReturn {
   id: string;
   completeName: string;
   cellphone: string;
   email: string;
+  client: object;
   registerDate: Date;
 }

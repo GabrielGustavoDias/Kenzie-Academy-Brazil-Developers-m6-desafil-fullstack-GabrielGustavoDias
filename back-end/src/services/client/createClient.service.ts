@@ -13,11 +13,11 @@ export const createClientService = async (
 
   const client = clientRepo.create(data);
 
+  await clientRepo.save(client);
+
   const clientSerialized = await clientReturnedSerializer.validate(client, {
     stripUnknown: true,
   });
-
-  await clientRepo.save(client);
 
   return clientSerialized;
 };

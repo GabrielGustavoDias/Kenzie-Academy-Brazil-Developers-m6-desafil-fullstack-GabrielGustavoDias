@@ -1,8 +1,8 @@
 import * as yup from "yup";
 import { SchemaOf } from "yup";
-import { IClientReturn } from "../interfaces/clients/client.interface";
+import { IContactReturn } from "../interfaces/contacts/contact.interface";
 
-export const clientCreateSerializer = yup.object().shape({
+export const contactCreateSerializer = yup.object().shape({
   cellphone: yup
     .string()
     .matches(
@@ -19,7 +19,7 @@ export const clientCreateSerializer = yup.object().shape({
   registerDate: yup.date().notRequired(),
 });
 
-export const clientReturnedSerializer: SchemaOf<IClientReturn> = yup
+export const contactReturnedSerializer: SchemaOf<IContactReturn> = yup
   .object()
   .shape({
     id: yup.string(),
@@ -27,4 +27,8 @@ export const clientReturnedSerializer: SchemaOf<IClientReturn> = yup
     cellphone: yup.string(),
     email: yup.string().email(),
     registerDate: yup.date(),
+    client: yup.object().shape({
+      id: yup.string(),
+      email: yup.string().email(),
+    }),
   });

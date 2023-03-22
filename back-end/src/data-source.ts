@@ -8,6 +8,7 @@ import { createRelatedColumns1679436046014 } from "./migrations/1679436046014-cr
 import { confirmRelations1679436173591 } from "./migrations/1679436173591-confirmRelations";
 import { addFieldsRequired1679438303755 } from "./migrations/1679438303755-addFieldsRequired";
 import { alterFieldCellphone1679496015215 } from "./migrations/1679496015215-alterFieldCellphone";
+import { alterFieldClients1679504733680 } from "./migrations/1679504733680-alterFieldClients";
 
 const setDataSourceConfig = (): DataSourceOptions => {
   const nodeEnv: string = process.env.NODE_ENV;
@@ -32,6 +33,7 @@ const setDataSourceConfig = (): DataSourceOptions => {
         confirmRelations1679436173591,
         addFieldsRequired1679438303755,
         alterFieldCellphone1679496015215,
+        alterFieldClients1679504733680,
       ],
     };
   }
@@ -52,6 +54,7 @@ const setDataSourceConfig = (): DataSourceOptions => {
       confirmRelations1679436173591,
       addFieldsRequired1679438303755,
       alterFieldCellphone1679496015215,
+      alterFieldClients1679504733680,
     ],
   };
 };

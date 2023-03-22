@@ -35,7 +35,7 @@ export class Contacts {
   registerDate: Date;
 
   @ManyToOne(() => Client, (client) => client.contact)
-  clients: Client;
+  client: Client;
 
   @UpdateDateColumn()
   updatedAt: Date;
