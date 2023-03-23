@@ -4,9 +4,13 @@ import {
   listContactController,
   updateContactController,
   deleteContactController,
+  listAllContactsController,
 } from "../controllers/contacts.controller";
 import { ensureAuthMiddleware } from "../middlewares/login/ensureAuth.middleware";
-import { contactCreateSerializer } from "../serializers/contact.serializer";
+import {
+  contactCreateSerializer,
+  updateContactSerializer,
+} from "../serializers/contact.serializer";
 import { verifyEmailAlreadyExists } from "../middlewares/verifyEmailAlreadyExists.middleware";
 import { verifyOwnerMiddleware } from "../middlewares/verifyOwner.middleware";
 import { verifySchemaMiddleware } from "../middlewares/verifySchema.middleware";
@@ -21,17 +25,17 @@ contactRoutes.post(
   createContactController
 );
 contactRoutes.get("", ensureAuthMiddleware, listContactController);
+contactRoutes.get("/all", ensureAuthMiddleware, listAllContactsController);
 contactRoutes.patch(
   "/:id",
   ensureAuthMiddleware,
   verifyOwnerMiddleware,
+  verifySchemaMiddleware(updateContactSerializer),
   updateContactController
 );
-contactRoutes.patch(
+contactRoutes.delete(
   "/:id",
   ensureAuthMiddleware,
   verifyOwnerMiddleware,
   deleteContactController
 );
-
-// CRIAR SERIALIZER DE UPDATE

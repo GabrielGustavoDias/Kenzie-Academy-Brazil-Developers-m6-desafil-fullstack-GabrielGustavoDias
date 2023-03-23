@@ -27,4 +27,15 @@ export const clientReturnedSerializer: SchemaOf<IClientReturn> = yup
     cellphone: yup.string(),
     email: yup.string().email(),
     registerDate: yup.date(),
+    updateAt: yup.date(),
   });
+
+export const updateClientSerializer = yup.object().shape({
+  completeName: yup.string().notRequired(),
+  cellphone: yup.string().notRequired(),
+  email: yup.string().email().notRequired(),
+  password: yup
+    .string()
+    .min(8, "The password must have at least 8 characters")
+    .notRequired(),
+});

@@ -12,4 +12,5 @@ export interface IClientReturn {
   cellphone: string;
   email: string;
   registerDate: Date;
+  updateAt: Date;
 }

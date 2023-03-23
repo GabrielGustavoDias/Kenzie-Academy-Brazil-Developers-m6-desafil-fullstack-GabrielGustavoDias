@@ -11,7 +11,7 @@ export const listClientService = async (
 ): Promise<IClientReturn> => {
   const clientRepo = AppDataSource.getRepository(Client);
 
-  const client = clientRepo.findOneBy({ id: clientId });
+  const client = await clientRepo.findOneBy({ id: clientId });
 
   const clientSerialized = await clientReturnedSerializer.validate(client, {
     stripUnknown: true,

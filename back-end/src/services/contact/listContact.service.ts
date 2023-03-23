@@ -8,7 +8,7 @@ export const listContactService = async (
 ): Promise<IContactReturn> => {
   const contactRepo = AppDataSource.getRepository(Contacts);
 
-  const contact = contactRepo.findOneBy({ id: contactId });
+  const contact = await contactRepo.findOneBy({ id: contactId });
 
   const contactSerialized = await contactReturnedSerializer.validate(contact, {
     stripUnknown: true,
