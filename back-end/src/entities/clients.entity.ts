@@ -1,4 +1,4 @@
-import { hashSync } from "bcryptjs";
+import { getRounds, hashSync } from "bcryptjs";
 
 import {
   BeforeInsert,
@@ -22,6 +22,12 @@ export class Client {
   email: string;
 
   @Column()
+  completeName: string;
+
+  @Column()
+  cellphone: string;
+
+  @Column()
   password: string;
 
   @CreateDateColumn()
@@ -33,17 +39,15 @@ export class Client {
   @DeleteDateColumn()
   deletedAt: Date;
 
-  @OneToMany(() => Contacts, (contacts) => contacts.clients)
+  @OneToMany(() => Contacts, (contacts) => contacts.client)
   contact: Contacts[];
 
   @BeforeUpdate()
   @BeforeInsert()
   hashPassword() {
-    this.password = hashSync(this.password, 10);
+    const hashed = getRounds(this.password);
+    if (!hashed) {
+      this.password = hashSync(this.password, 10);
+    }
   }
 }
-
-// Cliente = curso => lados N da relação
-// estudante => curso
-// 1 -> N
-// lado solo recebe many to one

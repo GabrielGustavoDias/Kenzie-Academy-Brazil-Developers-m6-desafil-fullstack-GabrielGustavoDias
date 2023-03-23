@@ -1,4 +1,4 @@
-import { hashSync } from "bcryptjs";
+import { getRounds, hashSync } from "bcryptjs";
 
 import {
   BeforeInsert,
@@ -26,7 +26,7 @@ export class Contacts {
   email: string;
 
   @Column()
-  cellphone: number;
+  cellphone: string;
 
   @Column()
   password: string;
@@ -35,7 +35,7 @@ export class Contacts {
   registerDate: Date;
 
   @ManyToOne(() => Client, (client) => client.contact)
-  clients: Client;
+  client: Client;
 
   @UpdateDateColumn()
   updatedAt: Date;
@@ -46,6 +46,9 @@ export class Contacts {
   @BeforeUpdate()
   @BeforeInsert()
   hashPassword() {
-    this.password = hashSync(this.password, 10);
+    const hashed = getRounds(this.password);
+    if (!hashed) {
+      this.password = hashSync(this.password, 10);
+    }
   }
 }
