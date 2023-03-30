@@ -1,11 +1,25 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { api } from "../services/api";
 import "react-toastify/dist/ReactToastify.css";
+import { AuthContext } from "./AuthContext";
 
 interface iClientProps {
   children: React.ReactNode;
+}
+
+export interface iContact {
+  id: string;
+  completeName: string;
+  email: string;
+  cellphone: string;
+}
+
+export interface iContacts {
+  id: string;
+  completeName: string;
+  contact: iContact[];
 }
 
 interface iRegister {
@@ -16,39 +30,42 @@ interface iRegister {
   confirmPassword: string;
 }
 
-interface iLogin {
-  email: string;
-  password: string;
-}
-
 interface iClientContext {
-  client: true | null;
-  setClient: React.Dispatch<React.SetStateAction<true | null>>;
-  login: (data: iLogin) => Promise<void>;
+  contactsList: iContacts[] | null;
+  setContactsList: React.Dispatch<React.SetStateAction<iContacts[] | null>>;
   registerClient: (data: iRegister) => Promise<void>;
   navigate: any;
+  logout: () => void;
 }
 
 export const ClientContext = createContext({} as iClientContext);
 
 export const ClientProvider = ({ children }: iClientProps) => {
-  const [client, setClient] = useState<true | null>(null);
+  const { setClient, login } = useContext(AuthContext);
+  const [contactsList, setContactsList] = useState<iContacts[] | null>(null);
 
   const navigate = useNavigate();
 
-  const login = async (data: any) => {
-    try {
-      const response = await api.post("login", data);
-      const token = response.data.token;
-      setClient(true);
-      localStorage.setItem("@accessToken", token);
-      toast.success("Login is sucessfull");
-      navigate("home");
-    } catch (error) {
-      toast.error("Verify the given informations and try again!");
-      localStorage.clear();
+  useEffect(() => {
+    const token = localStorage.getItem("@accessToken");
+    if (token) {
+      const autoLogin = async () => {
+        try {
+          const response = await api.get("contacts/all", {
+            headers: { Authorization: `Bearear ${token}` },
+          });
+          const list = response.data;
+          setContactsList(list);
+        } catch (error) {
+          localStorage.removeItem("@accessToken");
+          navigate("/");
+          toast.error("Connection lost please login again");
+        }
+      };
+
+      autoLogin();
     }
-  };
+  }, [contactsList, navigate]);
 
   const registerClient = async (data: any) => {
     try {
@@ -62,14 +79,20 @@ export const ClientProvider = ({ children }: iClientProps) => {
     }
   };
 
+  const logout = () => {
+    setClient(null);
+    localStorage.removeItem("@accessToken");
+    navigate("/");
+  };
+
   return (
     <ClientContext.Provider
       value={{
-        client,
-        setClient,
         navigate,
-        login,
+        contactsList,
+        setContactsList,
         registerClient,
+        logout,
       }}
     >
       {children}

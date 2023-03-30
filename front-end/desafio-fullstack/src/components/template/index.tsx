@@ -1,14 +1,15 @@
 import { ReactNode, useContext } from "react";
-import { ClientContext } from "../../context/ClientContext";
+import { AuthContext } from "../../context/AuthContext";
 import Header from "../Header";
 interface iProps {
   children: ReactNode;
 }
 const DefaultTemplate = ({ children }: iProps) => {
-  const { client } = useContext(ClientContext);
+  const { loading } = useContext(AuthContext);
+  console.log(loading);
   return (
     <>
-      {client ? <Header /> : <></>}
+      {loading ? <Header /> : <></>}
       <main>{children}</main>
     </>
   );

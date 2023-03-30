@@ -17,9 +17,8 @@ const RegisterContactForm = () => {
   } = useForm({ resolver: yupResolver(registerContactFormSerializer) });
 
   const submit = (formData: any) => {
-    console.log(formData);
     registerContact(formData);
-    // reset();
+    reset();
   };
 
   return (

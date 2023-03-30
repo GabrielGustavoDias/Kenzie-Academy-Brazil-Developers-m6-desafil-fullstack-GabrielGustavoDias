@@ -5,10 +5,10 @@ import Input from "../Input";
 import { yupResolver } from "@hookform/resolvers/yup";
 import InputPassword from "../InputPassword";
 import { useContext } from "react";
-import { ClientContext } from "../../context/ClientContext";
+import { AuthContext } from "../../context/AuthContext";
 
 const LoginForm = () => {
-  const { login } = useContext(ClientContext);
+  const { login } = useContext(AuthContext);
 
   const {
     register,
