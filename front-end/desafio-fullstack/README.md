@@ -1,5 +1,5 @@
 In the project directory, you can run:
-###`yarn`
+### `yarn`
 
 Install all dependencies in package.json
 
