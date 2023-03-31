@@ -1,4 +1,7 @@
 In the project directory, you can run:
+###`yarn`
+
+Install all dependencies in package.json
 
 ### `yarn start`
 
