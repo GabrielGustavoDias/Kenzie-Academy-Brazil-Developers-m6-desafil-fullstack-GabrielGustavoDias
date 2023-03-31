@@ -1,6 +1,7 @@
 import React from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { Message, Ref, UseFormRegister } from "react-hook-form";
+import { FieldSet } from "../../styles/elements";
 
 export interface iInput {
   id?: string;
@@ -19,7 +20,7 @@ interface iFieldError {
 
 const Input = ({ label, type, placeholder, register, error }: iInput) => {
   return (
-    <fieldset>
+    <FieldSet>
       {label && <label htmlFor={register.name}> {label}</label>}
       <input
         type={type}
@@ -28,7 +29,7 @@ const Input = ({ label, type, placeholder, register, error }: iInput) => {
         {...register}
       />
       {error && <p>{error.message}</p>}
-    </fieldset>
+    </FieldSet>
   );
 };
 

@@ -1,34 +1,31 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { ClientContext } from "../../context/ClientContext";
+import { HeaderStyled } from "./styles";
 
 const Header = () => {
-  const { setClient } = useContext(ClientContext);
-  const logout = () => {
-    setClient(null);
-  };
+  const { logout } = useContext(ClientContext);
 
   return (
-    <header>
+    <HeaderStyled>
       <nav role="navigation">
         <ul>
           <li>
-            <Link to="/home">Contatos</Link>
+            <Link to="/home">Contacts</Link>
           </li>
 
           <li>
-            <Link to="/contacts">Novo contato</Link>
+            <Link to="/contacts">New contact</Link>
           </li>
 
           <li>
             <Link to="/" onClick={logout}>
-              Sair
+              Logout
             </Link>
           </li>
         </ul>
-        <button>Dark mode</button>
       </nav>
-    </header>
+    </HeaderStyled>
   );
 };
 

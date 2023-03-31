@@ -22,14 +22,18 @@ export const ContactContext = createContext({} as iContactContext);
 
 export const ContactProvider = ({ children }: iContactProps) => {
   const registerContact = async (data: any) => {
-    try {
-      const token = localStorage.getitem("@accessToken");
-      await api.post("contacts", data, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      toast.success("Contact registred!");
-    } catch (error) {
-      toast.error("Entered data already registered");
+    const token = localStorage.getItem("@accessToken");
+    if (token) {
+      try {
+        await api.post("contacts", data, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        toast.success("Contact registred!");
+      } catch (error) {
+        toast.error("Entered data already registered");
+      }
+    } else {
+      toast.error("Connection lost please login again");
     }
   };
 

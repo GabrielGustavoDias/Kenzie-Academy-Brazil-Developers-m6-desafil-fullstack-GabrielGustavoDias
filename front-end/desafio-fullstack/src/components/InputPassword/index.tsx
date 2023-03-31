@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { iInput } from "../Input";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
+import { FieldSetPassword } from "../../styles/elements";
 
 const InputPassword = ({ label, placeholder, register, error }: iInput) => {
   const [isPassword, setIsPassword] = useState(true);
 
   return (
-    <fieldset>
+    <FieldSetPassword>
       {label && <label htmlFor={register.name}>{label}</label>}
       <input
         type={isPassword ? "password" : "text"}
@@ -18,7 +19,7 @@ const InputPassword = ({ label, placeholder, register, error }: iInput) => {
         {isPassword ? <MdVisibility /> : <MdVisibilityOff />}
       </button>
       {error && <p>{error.message}</p>}
-    </fieldset>
+    </FieldSetPassword>
   );
 };
 

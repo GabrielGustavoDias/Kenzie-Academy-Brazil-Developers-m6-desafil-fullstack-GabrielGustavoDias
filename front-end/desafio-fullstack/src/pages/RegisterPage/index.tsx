@@ -1,12 +1,13 @@
 import React from "react";
 import RegisterForm from "../../components/RegisterForm";
+import { Box } from "../LoginPage/styled";
 
 const RegisterPage = () => {
   return (
-    <>
-      <h1>Cadastre-se</h1>
+    <Box>
+      <h1>Register</h1>
       <RegisterForm />
-    </>
+    </Box>
   );
 };
 

@@ -5,6 +5,7 @@ import { registerFormSerializer } from "../../schemas/registerFormSchema";
 import InputPassword from "../InputPassword";
 import { useContext } from "react";
 import { ClientContext } from "../../context/ClientContext";
+import { Form } from "../LoginForm/styles";
 
 const RegisterForm = () => {
   const { registerClient } = useContext(ClientContext);
@@ -21,7 +22,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(submit)}>
+    <Form onSubmit={handleSubmit(submit)}>
       <Input
         label="Name"
         type="text"
@@ -49,7 +50,7 @@ const RegisterForm = () => {
       <InputPassword
         label="Confirm your password"
         type="password"
-        placeholder="Confirmação de senha"
+        placeholder="Confirm password"
         register={register("confirmPassword")}
         error={errors.confirmPassword}
       />
@@ -62,8 +63,10 @@ const RegisterForm = () => {
         error={errors.cellphone}
       />
 
-      <button type="submit">Next</button>
-    </form>
+      <button className=".button" type="submit">
+        Next
+      </button>
+    </Form>
   );
 };
 
