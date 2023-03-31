@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { ClientContext } from "../../context/ClientContext";
+import { HeaderStyled } from "./styles";
 
 const Header = () => {
   const { logout } = useContext(ClientContext);
 
   return (
-    <header>
+    <HeaderStyled>
       <nav role="navigation">
         <ul>
           <li>
@@ -24,7 +25,7 @@ const Header = () => {
           </li>
         </ul>
       </nav>
-    </header>
+    </HeaderStyled>
   );
 };
 

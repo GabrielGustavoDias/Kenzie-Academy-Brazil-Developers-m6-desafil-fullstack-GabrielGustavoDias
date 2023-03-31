@@ -1,16 +1,16 @@
 import { ReactNode, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import Header from "../Header";
+import { Main } from "./styles";
 interface iProps {
   children: ReactNode;
 }
 const DefaultTemplate = ({ children }: iProps) => {
-  const { loading } = useContext(AuthContext);
-  console.log(loading);
+  const { client } = useContext(AuthContext);
   return (
     <>
-      {loading ? <Header /> : <></>}
-      <main>{children}</main>
+      {client ? <Header /> : <></>}
+      <Main>{children}</Main>
     </>
   );
 };

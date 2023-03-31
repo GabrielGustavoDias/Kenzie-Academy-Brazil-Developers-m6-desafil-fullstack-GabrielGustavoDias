@@ -2,10 +2,12 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { loginSerializer } from "../../schemas/loginFormSchema";
 import Input from "../Input";
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import InputPassword from "../InputPassword";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { Form } from "./styles";
 
 const LoginForm = () => {
   const { login } = useContext(AuthContext);
@@ -23,9 +25,9 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(submit)} noValidate>
+    <Form onSubmit={handleSubmit(submit)} noValidate>
       <Input
-        label="email"
+        label="Email"
         type="email"
         placeholder="Email"
         register={register("email")}
@@ -34,7 +36,7 @@ const LoginForm = () => {
       <InputPassword
         label="Password"
         type="password"
-        placeholder="type your password"
+        placeholder="Password"
         register={register("password")}
         error={errors.password}
       />
@@ -42,9 +44,9 @@ const LoginForm = () => {
       <button type="submit">Next</button>
 
       <Link to="/register">
-        <button>Register</button>
+        <button className="button">Register</button>
       </Link>
-    </form>
+    </Form>
   );
 };
 

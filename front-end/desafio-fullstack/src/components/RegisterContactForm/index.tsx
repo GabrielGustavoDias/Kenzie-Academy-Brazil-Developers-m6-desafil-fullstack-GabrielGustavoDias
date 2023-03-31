@@ -5,6 +5,7 @@ import InputPassword from "../InputPassword";
 import { useContext } from "react";
 import { ContactContext } from "../../context/ContactContext";
 import { registerContactFormSerializer } from "../../schemas/registerContactFormSchema";
+import { Form } from "../LoginForm/styles";
 
 const RegisterContactForm = () => {
   const { registerContact } = useContext(ContactContext);
@@ -22,7 +23,7 @@ const RegisterContactForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(submit)}>
+    <Form onSubmit={handleSubmit(submit)}>
       <Input
         label="Name"
         type="text"
@@ -48,21 +49,18 @@ const RegisterContactForm = () => {
       />
 
       <Input
-        label="Contact cellphone"
+        label="Cellphone"
         type="text"
         placeholder="Type your contact cellphone number"
         register={register("cellphone")}
         error={errors.cellphone}
       />
 
-      <button type="submit">Register</button>
-    </form>
+      <button className="button" type="submit">
+        Register
+      </button>
+    </Form>
   );
 };
-
-// cellphone: "(11) 99604-2205";
-// completeName: "Jorge Comum";
-// email: "abc@gmail.com";
-// password: "12345678";
 
 export default RegisterContactForm;
