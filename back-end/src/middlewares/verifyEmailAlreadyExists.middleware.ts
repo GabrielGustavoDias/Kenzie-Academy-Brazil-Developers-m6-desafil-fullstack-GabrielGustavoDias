@@ -15,8 +15,6 @@ export const verifyEmailAlreadyExists = async (
   const client = await clientRepo.findBy({ email: req.body.email });
   const contact = await contactRepo.findBy({ email: req.body.email });
 
-  console.log(client);
-  console.log(contact);
   if (client.length > 0 || contact.length > 0) {
     throw new AppError("Email already registered", 409);
   }

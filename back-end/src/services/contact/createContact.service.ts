@@ -26,6 +26,5 @@ export const createContactService = async (
   const contactSerialized = await contactReturnedSerializer.validate(contact, {
     stripUnknown: true,
   });
-
   return contactSerialized;
 };
