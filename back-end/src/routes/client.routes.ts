@@ -18,11 +18,11 @@ export const clientRoutes = Router();
 
 clientRoutes.post(
   "",
-  ensureAuthMiddleware,
   verifySchemaMiddleware(clientCreateSerializer),
   verifyEmailAlreadyExists,
   createClientController
 );
+
 clientRoutes.get("", ensureAuthMiddleware, listClientController);
 
 clientRoutes.patch(
